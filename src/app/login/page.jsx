@@ -1,20 +1,20 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { useForm } from "react-hook-form"
-import { signIn } from "next-auth/react"
-import { FaGoogle, FaGithub } from "react-icons/fa"
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { signIn } from "next-auth/react";
+import { FaGoogle, FaGithub } from "react-icons/fa";
 
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function SignIn() {
-  const { register, handleSubmit } = useForm()
-  const [showPassword, setShowPassword] = useState(false)
+  const { register, handleSubmit } = useForm();
+  const [showPassword, setShowPassword] = useState(false);
 
   function onSubmit(data) {
-    console.log(data)
+    console.log(data);
   }
 
   return (
@@ -56,7 +56,10 @@ export default function SignIn() {
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div>
             <label className="block text-sm font-medium mb-2">Username</label>
-            <Input {...register("username")} placeholder="Enter your username" />
+            <Input
+              {...register("username")}
+              placeholder="Enter your username"
+            />
           </div>
 
           <div>
@@ -100,12 +103,15 @@ export default function SignIn() {
 
           <p className="text-center text-sm mt-4">
             Don't have an account?{" "}
-            <a href="/register" className="text-primary font-semibold hover:underline">
+            <a
+              href="/register"
+              className="text-primary font-semibold hover:underline"
+            >
               Register here
             </a>
           </p>
         </form>
       </Card>
     </div>
-  )
+  );
 }
