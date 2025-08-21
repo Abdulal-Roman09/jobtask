@@ -1,19 +1,31 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { useForm } from "react-hook-form"
-import { FaGoogle, FaGithub } from "react-icons/fa"
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { signIn } from "next-auth/react";
+import { FaGoogle, FaGithub } from "react-icons/fa";
 
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function Register() {
-  const { register, handleSubmit } = useForm()
-  const [showPassword, setShowPassword] = useState(false)
+  const { register, handleSubmit } = useForm();
+  const [showPassword, setShowPassword] = useState(false);
 
-  function onSubmit(data) {
-    console.log(data)
+  async function onSubmit(data) {
+    // Example: send registration data to backend API
+    try {
+      const res = await fetch("/api/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      const result = await res.json();
+      console.log(result);
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   return (
@@ -28,14 +40,14 @@ export default function Register() {
           <Button
             variant="outline"
             className="w-full flex items-center justify-center gap-2"
-            onClick={() => console.log("Google Register")}
+            onClick={() => signIn("google", { callbackUrl: "/" })}
           >
             <FaGoogle className="w-4 h-4" /> Continue with Google
           </Button>
           <Button
             variant="outline"
             className="w-full flex items-center justify-center gap-2"
-            onClick={() => console.log("GitHub Register")}
+            onClick={() => signIn("github", { callbackUrl: "/" })}
           >
             <FaGithub className="w-4 h-4" /> Continue with GitHub
           </Button>
@@ -94,5 +106,5 @@ export default function Register() {
         </form>
       </Card>
     </div>
-  )
+  );
 }
