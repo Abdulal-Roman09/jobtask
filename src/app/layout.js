@@ -1,17 +1,9 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Navber from "@/components/Navber";
-import { ThemeProvider } from "@/components/theme-provider";
+import NavClients from "@/components/navber/NavClients";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
+const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export const metadata = {
   title: "JobTask",
@@ -21,13 +13,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <Navber />
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <NavClients>
           <div className="container mx-auto">{children}</div>
-        </ThemeProvider>
+        </NavClients>
       </body>
     </html>
   );
