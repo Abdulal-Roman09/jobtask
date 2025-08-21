@@ -15,8 +15,9 @@ export default function Register() {
 
   async function onSubmit(data) {
     // Example: send registration data to backend API
+    console.log(data)
     try {
-      const res = await fetch("/api/register", {
+      const res = await fetch("/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
